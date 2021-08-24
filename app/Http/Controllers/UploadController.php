@@ -22,12 +22,11 @@ class UploadController extends Controller
         $accID        = trim(end($trimID));
         foreach ($re_param['file'] as $item) {
             $contenttype  = 'image/'.$item->extension();
-            $name         = 'testupload.'.$item->extension();
+            $name         = $item->hashName();
             $param = [
                 'accId' => $accID,
                 'contenttype' => $contenttype,
                 'name' => $name,
-                ''
             ];
             $body = base64_encode(file_get_contents($item->path()));
             $uri = $data['instance_url'] . '/services/apexrest/DocumentUploadBase64?';
@@ -58,7 +57,7 @@ class UploadController extends Controller
     public function view(Request $request)
     {
         $accessToken = '00D5g00000A4cc5!AQgAQJ_FC6cegs8Z49MU6ma3vQxr_n.US52lQUsIr4T7QQOIzpn9.PlB519w1lwqiIFPA1TSoBowYuLRxpgHCBNxL5QdpxWl';
-        $url = $this->getUrlImage('https://vti7-dev-ed.my.salesforce.com',$accessToken,'0695g00000062NMAAY');
+        $url = $this->getUrlImage('https://vti7-dev-ed.my.salesforce.com',$accessToken,'0695g00000062Q6AAI');
         return view('viewImg',['img_url' => $url]);
     }
     public function getAccessToken()
